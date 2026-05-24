@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InMusic Studio — הפקה מוזיקלית וקליפים בסטנדרט הוליוודי</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Heebo:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+<style>
+  /* ── TOKENS ── */
+  :root {
+    --gold:        #C9A84C;
+    --gold-lt:     #E8D08A;
+    --purple-lt:   #D8B4FE;
+    --bg-main:     #0A0A08;
+    --bg-form:     #111109;
+    --bg-input:    #1A1A14;
+    --border:      rgba(201,168,76,0.25);
+    --border-foc:  rgba(201,168,76,0.8);
+    --text:        #E8E4D8;
+    --text-dim:    #8A8470;
+    --whatsapp:    #25D366;
+    --sans:        'Heebo', sans-serif;
+    --serif:       'Playfair Display', serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-main);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    padding: 3rem 1.5rem;
+    min-height: 100vh;
+  }
+
+  .landing-container { max-width: 1000px; margin: 0 auto; }
+
+  /* ── INTRO SECTION ── */
+  .intro-section { text-align: center; margin-bottom: 4rem; }
+  .intro-tag {
+    display: inline-block; color: var(--gold); font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase; border: 1px solid var(--border);
+    padding: 0.4rem 1.2rem; border-radius: 20px; margin-bottom: 1.5rem;
+  }
+  .intro-title {
+    font-family: var(--serif); color: var(--gold-lt);
+    font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.15; margin-bottom: 1.2rem;
+  }
+  .intro-desc {
+    color: var(--text-dim); font-size: 1.15rem; font-weight: 300; max-width: 750px; margin: 0 auto;
+  }
+  .intro-highlight { color: var(--text); font-weight: 500; margin-top: 1rem; display: block; }
+
+  /* ── PROCESS SECTION ── */
+  .process-section {
+    background: var(--bg-form); border: 1px solid var(--border); border-radius: 8px;
+    padding: 3.5rem 2rem; margin-bottom: 4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    position: relative; overflow: hidden;
+  }
+  .process-section::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--purple-lt), transparent);
+  }
+  .process-header { text-align: center; margin-bottom: 3rem; }
+  .process-header h2 { font-family: var(--serif); color: var(--purple-lt); font-size: 2.4rem; margin-bottom: 0.5rem; }
+
+  .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2.5rem; }
+  .process-step { position: relative; padding-top: 2.5rem; }
+
+  .step-number {
+    position: absolute; top: -15px; right: -10px; font-family: var(--serif);
+    font-size: 5rem; font-weight: 900; color: rgba(216, 180, 254, 0.15);
+    line-height: 1; z-index: 0;
+  }
+  .process-step h4 { color: var(--purple-lt); font-size: 1.2rem; margin-bottom: 0.5rem; position: relative; z-index: 1; }
+  .process-step p { color: var(--text); font-size: 0.95rem; font-weight: 300; position: relative; z-index: 1; }
+
+  /* ── SECTION TITLES ── */
+  .section-title {
+    font-family: var(--serif); color: var(--gold); font-size: 1.8rem; margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;
+  }
+  .services-grid { display: grid; gap: 1.5rem; margin-bottom: 4rem; }
+  .grid-personal { grid-template-columns: repeat(3, 1fr); }
+  .grid-business { grid-template-columns: repeat(2, 1fr); }
+
+  .service-card {
+    height: 400px; border-radius: 8px; border: 1px solid var(--border); position: relative;
+    overflow: hidden; cursor: pointer; text-decoration: none; display: block;
+  }
+  .bg-wedding { background: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80') center/cover; }
+  .bg-party   { background: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80') center/cover; }
+  .bg-family  { background: url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80') center/cover; }
+  .bg-biz     { background: url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=80') center/cover; }
+  .bg-video   { background: url('https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?auto=format&fit=crop&w=800&q=80') center/cover; }
+
+  .service-bg { position: absolute; inset: 0; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+  .service-card:hover .service-bg { transform: scale(1.08); }
+
+  .card-front {
+    position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,8,0.95) 0%, rgba(10,10,8,0.2) 50%, rgba(10,10,8,0) 100%);
+    display: flex; align-items: flex-end; padding: 2rem; transition: opacity 0.4s ease;
+  }
+  .card-front h3 { font-family: var(--serif); color: var(--gold-lt); font-size: 1.6rem; text-shadow: 0 4px 10px rgba(0,0,0,0.9); }
+
+  .card-hover {
+    position: absolute; inset: 0; background: rgba(10, 10, 8, 0.94); backdrop-filter: blur(8px); display: flex;
+    flex-direction: column; justify-content: center; padding: 2rem; opacity: 0; transition: opacity 0.4s ease; text-align: center;
+  }
+  .service-card:hover .card-front { opacity: 0; }
+  .service-card:hover .card-hover { opacity: 1; }
+
+  .card-hover h4 { color: var(--gold); font-size: 1.4rem; margin-bottom: 1rem; }
+  .card-hover p { color: var(--text); font-size: 1rem; font-weight: 300; margin-bottom: 1.5rem; }
+  .card-btn { display: inline-block; border: 1px solid var(--gold); color: var(--gold-lt); padding: 0.5rem 1.5rem; border-radius: 4px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── PORTFOLIO SPLIT BANNER ── */
+  .portfolio-banner {
+    display: flex; align-items: center; justify-content: space-between; gap: 3rem;
+    background: linear-gradient(135deg, #111109 0%, #0A0A08 100%);
+    border: 1px solid var(--border); border-radius: 8px; padding: 3rem;
+    margin-bottom: 5rem; box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  }
+  .portfolio-text { flex: 1; }
+  .portfolio-text h2 { font-family: var(--serif); color: var(--gold-lt); font-size: 2.2rem; margin-bottom: 1rem; }
+  .portfolio-text p { color: var(--text); font-size: 1.1rem; margin-bottom: 2rem; font-weight: 300; line-height: 1.6; }
+  .suno-link-btn {
+    display: inline-flex; align-items: center; gap: 12px; background: var(--gold); color: #000;
+    text-decoration: none; padding: 1rem 2rem; border-radius: 4px; font-weight: 700; transition: all 0.3s ease;
+  }
+  .suno-link-btn:hover { background: var(--gold-lt); transform: scale(1.03); }
+  
+  .portfolio-image {
+    flex: 0 0 300px; border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--border); box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  }
+  .portfolio-image img { width: 100%; height: auto; display: block; }
+
+  /* ── ABOUT SECTION (RESTORED FULL TEXT) ── */
+  .about-section {
+    max-width: 850px; margin: 0 auto 4rem auto; background: var(--bg-form);
+    border-right: 4px solid var(--gold); padding: 3rem 2.5rem; border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+  .about-section h3 { font-family: var(--serif); color: var(--gold-lt); font-size: 1.8rem; margin-bottom: 1rem; }
+  .about-section p { color: var(--text); font-weight: 300; font-size: 1.1rem; line-height: 1.7; }
+
+  /* ── FAQ SECTION (RESTORED FULL TEXT) ── */
+  .faq-section { max-width: 850px; margin: 0 auto 5rem auto; }
+  .faq-header { text-align: center; margin-bottom: 2rem; }
+  .faq-header h2 { font-family: var(--serif); color: var(--gold-lt); font-size: 2.2rem; }
+  details { background: var(--bg-form); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1rem; overflow: hidden; }
+  summary { padding: 1.5rem; color: var(--gold-lt); font-family: var(--serif); font-size: 1.2rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+  summary::after { content: '+'; color: var(--gold); font-size: 1.5rem; }
+  details[open] summary::after { content: '−'; }
+  .faq-content { padding: 0 1.5rem 1.5rem 1.5rem; color: var(--text); font-weight: 300; font-size: 1.05rem; line-height: 1.7; }
+
+  /* ── ORDER FORM ── */
+  .form-section { max-width: 850px; margin: 0 auto 4rem auto; }
+  .inmusic-form-wrapper { background: var(--bg-form); border: 1px solid var(--border); border-radius: 8px; padding: 3rem 2rem; position: relative; }
+  .inmusic-form-wrapper::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+  .form-header { text-align: center; margin-bottom: 2.5rem; }
+  .form-header h2 { font-family: var(--serif); color: var(--gold-lt); font-size: 2.2rem; margin-bottom: 0.5rem; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .full-width { grid-column: 1 / -1; }
+  .input-group label { display: block; font-size: 0.95rem; color: var(--gold); margin-bottom: 0.6rem; font-weight: 500; }
+  .inmusic-input, .inmusic-select, .inmusic-textarea {
+    width: 100%; background: var(--bg-input); border: 1px solid var(--border); border-radius: 4px;
+    padding: 1.1rem; color: var(--text); font-family: var(--sans); font-size: 1.05rem;
+  }
+  .inmusic-input:focus, .inmusic-select:focus, .inmusic-textarea:focus { outline: none; border-color: var(--gold); }
+  .submit-btn {
+    width: 100%; background: linear-gradient(135deg, var(--whatsapp), #1EBE5D); color: #fff; border: none; border-radius: 4px;
+    padding: 1.4rem; font-size: 1.2rem; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 2rem;
+  }
+
+  /* ── WHATSAPP CTA ── */
+  .whatsapp-quick-cta { text-align: center; margin-bottom: 5rem; }
+  .wa-btn-floating {
+    display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: #fff;
+    padding: 1.2rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); transition: transform 0.3s ease;
+  }
+  .wa-btn-floating:hover { transform: translateY(-3px); }
+
+  @media (max-width: 900px) {
+    .grid-personal, .grid-business, .form-grid { grid-template-columns: 1fr; }
+    .portfolio-banner { flex-direction: column; text-align: center; padding: 2rem; }
+    .portfolio-image { flex: 0 0 auto; width: 100%; max-width: 250px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="landing-container">
+  
+  <section class="intro-section">
+    <div class="intro-tag">InMusic Studio</div>
+    <h1 class="intro-title">פסקול קולנועי לסיפור שלכם<br>מאסטר אולפני תוך 48 שעות.</h1>
+    <p class="intro-desc">
+      אנחנו לא מייצרים 'עוד הקלטה' — אלא יצירת מופת מוזיקלית ברמה הגבוהה ביותר בישראל. מילים מקוריות, לחן מדויק, וביצוע ווקאלי ללא פשרות. 
+    </p>
+    <span class="intro-highlight">הגיע הזמן להפוך את הרגעים הגדולים שלכם להפקה שמרעידה את הלב.</span>
+  </section>
+
+  <section class="process-section">
+    <div class="process-header">
+      <h2>🎬 תהליך ההפקה באולפן</h2>
+      <p style="color:var(--text-dim);">חמישה שלבים מדויקים בדרך לפסקול המושלם שלכם.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-number">1</div>
+        <h4>הגדרת היעד</h4>
+        <p>בוחרים את מטרת ההפקה (חופה, המנון רחבה, מתנה או מיתוג מסחרי).</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">2</div>
+        <h4>אפיון והשראה</h4>
+        <p>משתפים אותנו בכֹּל הפרטים והזיכרונות שבונים את הסיפור שלכם.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">3</div>
+        <h4>כתיבה והלחנה</h4>
+        <p>אתם מספקים טקסט, או שצוות הכותבים שלנו תופר מילים מקוריות עבורכם.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">4</div>
+        <h4>בימוי מוזיקלי</h4>
+        <p>בוחרים את הז'אנר והתדר. מפופ-האוס ועד בלדה קולנועית או טראנס.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">5</div>
+        <h4>המאסטר אצלכם</h4>
+        <p>קובץ האודיו הסופי אצלכם במייל תוך 48 שעות, כולל עמוד YouTube רשמי.</p>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">אירועים ורגעים אישיים</h2>
+  <section class="services-grid grid-personal">
+    <a href="#order-form" class="service-card">
+      <div class="service-bg bg-wedding"></div>
+      <div class="card-front"><h3>שירי חופה וחתונות</h3></div>
+      <div class="card-hover">
+        <h4>חתונות ואירועים</h4>
+        <p>שיר כניסה עוצמתי לחופה, שיר הפתעה מצחיק מהחברים, או סלואו ראשון שנכתב במיוחד לסיפור האהבה שלכם.</p>
+        <span class="card-btn">להזמנת שיר</span>
+      </div>
+    </a>
+    <a href="#order-form" class="service-card">
+      <div class="service-bg bg-party"></div>
+      <div class="card-front"><h3>בר/בת מצווה</h3></div>
+      <div class="card-hover">
+        <h4>המנון רחבה</h4>
+        <p>הפקות פופ, האוס וטראנס מרימות. מילים אישיות המותאמות לילד/ת השמחה שיהפכו ללהיט של הערב.</p>
+        <span class="card-btn">להזמנת שיר</span>
+      </div>
+    </a>
+    <a href="#order-form" class="service-card">
+      <div class="service-bg bg-family"></div>
+      <div class="card-front"><h3>מתנות למשפחה</h3></div>
+      <div class="card-hover">
+        <h4>מרגש ואישי</h4>
+        <p>שיר במתנה ליום הולדת 70 לסבא/סבתא, או יום נישואין. מילים שנוגעות בנקודות הכי אישיות של המשפחה.</p>
+        <span class="card-btn">להזמנת שיר</span>
+      </div>
+    </a>
+  </section>
+
+  <h2 class="section-title">החטיבה המסחרית — סאונד ווידאו</h2>
+  <section class="services-grid grid-business">
+    <a href="#order-form" class="service-card">
+      <div class="service-bg bg-biz"></div>
+      <div class="card-front"><h3>מיתוג וסאונד לעסקים</h3></div>
+      <div class="card-hover">
+        <h4>InMusic Corporate</h4>
+        <p>ג'ינגלים, מוזיקת תדמית, קריינות ומיתוג אודיו שמשדר יוקרה ומבדל את העסק שלכם.</p>
+        <span class="card-btn">להזמנת סאונד</span>
+      </div>
+    </a>
+    <a href="#order-form" class="service-card">
+      <div class="service-bg bg-video"></div>
+      <div class="card-front"><h3>הפקת קליפ ממותג</h3></div>
+      <div class="card-hover">
+        <h4>וידאו באיכות הוליוודית</h4>
+        <p>שילוב של סאונד אולפני עם ויזואליה מרהיבה. הפקה המותאמת לכל פלטפורמה (מרוחב מלא ועד 9:16 לניידים).</p>
+        <span class="card-btn">להזמנת קליפ</span>
+      </div>
+    </a>
+  </section>
+
+  <section class="portfolio-banner">
+    <div class="portfolio-text">
+      <h2>הצצה להפקות האולפן</h2>
+      <p>האזינו לתיק העבודות המלא שלנו ב-Suno. מגוון רחב של סגנונות, לחנים וביצועים מבית InMusic Studio.</p>
+      <a href="https://suno.com/@moshehillel2026" target="_blank" class="suno-link-btn">
+        <span>האזינו לתיק העבודות ב-Suno</span> 🎧
+      </a>
+    </div>
+    <div class="portfolio-image">
+      <img src="logo.jpg" alt="InMusic Studio Logo">
+    </div>
+  </section>
+
+  <section class="about-section">
+    <h3>המאסטרו מאחורי הקונסולה</h3>
+    <p>
+      נעים להכיר, אני לירון הלל — מפיק מוזיקלי, במאי וידאו ומומחה לטכנולוגיות AI סאונד. עם מעל שני עשורים של יצירה, צילום ועריכה בתעשיית הקולנוע והמוזיקה, הקמתי את הסטודיו במטרה אחת: להביא סטנדרט של הוליווד לכל הפקה אישית או עסקית.
+      <br><br>
+      אין כאן מקום לבינוניות. כֹּל שיר, כֹּל צליל וכֹּל פריים מקבלים טיפול כירורגי – מבחירת כלי הנגינה המדויק (בין אם זה סינתיסייזר אנלוגי או קמנצ'ה מסורתי) ועד למאסטרינג הסופי. התפקיד שלי הוא לקחת את החזון שלכם, ולהעיף אותו הכי רחוק שאפשר.
+    </p>
+  </section>
+
+  <section class="faq-section">
+    <div class="faq-header">
+      <h2>שאלות נפוצות</h2>
+    </div>
+
+    <details>
+      <summary>האם אני חייב לכתוב את מילות השיר בעצמי?</summary>
+      <div class="faq-content">
+        ממש לא. אם יש לכם מילים שכתבתם מהלב – נשמח להלחין אותן. אבל אם לא, כֹּל מה שאתם צריכים לעשות זה לספר לנו את הסיפור. צוות הכותבים שלנו יהפוך את הזיכרונות, השמות והרגעים שלכם לטקסט מחורז ומרגש.
+      </div>
+    </details>
+
+    <details>
+      <summary>מה התהליך לאחר התשלום, ואם נרצה דיוקים בשיר?</summary>
+      <div class="faq-content">
+        לאחר אישור האפיון והסדרת התשלום, הסטודיו נכנס להפקה ותוך 48 שעות תקבלו את המאסטר לאימייל. אם מכֹּל סיבה שהיא התוצאה לא מושלמת בעיניכם – אנחנו כאן. שביעות הרצון שלכם היא מעל הכֹּל. פשוט שלחו לנו הודעה בוואטסאפ, ונחזור אליכם מיד לביצוע הדיוקים הדרושים.
+      </div>
+    </details>
+
+    <details>
+      <summary>האם אפשר לבחור מי שר את השיר?</summary>
+      <div class="faq-content">
+        בוודאי. באפיון ההפקה תוכלו לבחור אם תרצו קול גברי, נשי, או דואט, ולהגדיר את הסגנון הקולי (סול-מרגש, פופ-אנרגטי, חזנות אותנטית ועוד).
+      </div>
+    </details>
+
+    <details>
+      <summary>איך עובד תהליך הקליפ והאם ניתן לבצע בו שינויים?</summary>
+      <div class="faq-content">
+        הפקת וידאו קולנועית (המותאמת אישית לכל פלטפורמה – ממסך רחב ועד יחס 9:16 מושלם לניידים) דורשת תכנון מוקפד. לכן, לפני היציאה להפקה, ניזום שיחת בימוי אישית עם לירון כדי להבין את הוויז'ן (Vision) שלכם לפרטי פרטים. רק לאחר סיכום ואישור מולכם, הקליפ יוצא לביצוע באופן חד-פעמי. במקרה בו תרצו לשנות קונספט או להפיק קליפ חדש לאחר אישור האפיון, תיגבה עלות מינימלית נוספת.
+      </div>
+    </details>
+  </section>
+
+  <section id="order-form" class="form-section">
+    <div class="inmusic-form-wrapper">
+      <div class="form-header">
+        <h2>אפיון הפקה מתקדם</h2>
+        <p style="color:var(--text-dim); font-weight:300;">מלאו את כֹּל הפרטים, והמערכת תשלח אפיון מסודר ישירות אלינו לוואטסאפ.</p>
+      </div>
+      <form id="production-form" onsubmit="sendToWhatsApp(event)">
+        <div class="form-grid">
+          <div class="input-group">
+            <label>שם המזמין/ה</label>
+            <input type="text" id="field-name" class="inmusic-input" placeholder="שם מלא" required>
+          </div>
+          <div class="input-group">
+            <label>טלפון נייד</label>
+            <input type="tel" id="field-phone" class="inmusic-input" placeholder="05X-XXXXXXX" required>
+          </div>
+        </div>
+        <div class="form-grid" style="margin-top:1.5rem;">
+          <div class="input-group">
+            <label>עבור מי ההפקה?</label>
+            <input type="text" id="field-target" class="inmusic-input" placeholder="לסבא משה, לחברת..." required>
+          </div>
+          <div class="input-group">
+            <label>סוג ההפקה</label>
+            <select id="field-type" class="inmusic-select" required>
+              <option value="" disabled selected>בחרו...</option>
+              <option value="wedding">שיר לחתונה</option>
+              <option value="friends">שיר חברים</option>
+              <option value="barmitzvah">בר/בת מצווה</option>
+              <option value="birthday">יום הולדת / נישואין</option>
+              <option value="biz_audio">מיתוג עסקי</option>
+              <option value="biz_video">הפקת קליפ ממותג</option>
+            </select>
+          </div>
+        </div>
+        <div class="input-group full-width" style="margin-top:1.5rem;">
+          <label>סגנון (Vibe)</label>
+          <input type="text" id="field-vibe" class="inmusic-input" placeholder="פופ, בלדה, טראנס...">
+        </div>
+        <div class="input-group full-width" style="margin-top:1.5rem;">
+          <label>סיפור הרקע וחזון</label>
+          <textarea id="field-story" class="inmusic-textarea" style="height:120px;" placeholder="שתפו כמה שיותר פרטים..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          הזנק הפקה בוואטסאפ
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <div class="whatsapp-quick-cta">
+    <a href="https://wa.me/972525544445" target="_blank" class="wa-btn-floating">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      מענה מהיר בוואטסאפ
+    </a>
+  </div>
+
+</div>
+
+<script>
+  function sendToWhatsApp(event) {
+    event.preventDefault(); 
+    const name = document.getElementById('field-name').value;
+    const phone = document.getElementById('field-phone').value;
+    const target = document.getElementById('field-target').value;
+    const type = document.getElementById('field-type').options[document.getElementById('field-type').selectedIndex].text;
+    const vibe = document.getElementById('field-vibe').value;
+    const story = document.getElementById('field-story').value;
+
+    let msg = `*היי לירון, הגעתי מדף הנחיתה של האולפן!* 🎧\n\n`;
+    msg += `*שם:* ${name}\n*טלפון:* ${phone}\n*עבור:* ${target}\n*סוג:* ${type}\n`;
+    if (vibe) msg += `*סטייל:* ${vibe}\n`;
+    if (story) msg += `*סיפור:* ${story}\n`;
+
+    const whatsappUrl = `https://wa.me/972525544445?text=${encodeURIComponent(msg)}`;
+    window.open(whatsappUrl, '_blank');
+  }
+</script>
+
+</body>
+</html>
