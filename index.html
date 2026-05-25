@@ -30,11 +30,37 @@
     color: var(--text);
     font-family: var(--sans);
     line-height: 1.6;
-    padding: 3rem 1.5rem;
+    padding-bottom: 4rem;
     min-height: 100vh;
   }
 
-  .landing-container { max-width: 1000px; margin: 0 auto; }
+  .landing-container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ── HERO BANNER ── */
+  .hero-banner {
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(10,10,8,0.6) 0%, #0A0A08 100%), url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1800&q=80') center/cover;
+    padding: 6rem 1.5rem 4rem 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+  .hero-banner h0 {
+    font-family: var(--serif);
+    color: var(--gold-lt);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    display: block;
+    margin-bottom: 1rem;
+    font-weight: 900;
+  }
+  .hero-banner p {
+    color: var(--text);
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 300;
+    max-width: 800px;
+    margin: 0 auto;
+  }
 
   /* ── INTRO SECTION ── */
   .intro-section { text-align: center; margin-bottom: 4rem; }
@@ -45,7 +71,7 @@
   }
   .intro-title {
     font-family: var(--serif); color: var(--gold-lt);
-    font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.15; margin-bottom: 1.2rem;
+    font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; margin-bottom: 1.2rem;
   }
   .intro-desc {
     color: var(--text-dim); font-size: 1.15rem; font-weight: 300; max-width: 750px; margin: 0 auto;
@@ -79,14 +105,14 @@
   /* ── SECTION TITLES ── */
   .section-title {
     font-family: var(--serif); color: var(--gold); font-size: 1.8rem; margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-top: 2rem;
   }
   .services-grid { display: grid; gap: 1.5rem; margin-bottom: 4rem; }
   .grid-personal { grid-template-columns: repeat(3, 1fr); }
   .grid-business { grid-template-columns: repeat(2, 1fr); }
 
   .service-card {
-    height: 400px; border-radius: 8px; border: 1px solid var(--border); position: relative;
+    height: 380px; border-radius: 8px; border: 1px solid var(--border); position: relative;
     overflow: hidden; cursor: pointer; text-decoration: none; display: block;
   }
   .bg-wedding { background: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80') center/cover; }
@@ -125,6 +151,7 @@
   .portfolio-text { flex: 1; }
   .portfolio-text h2 { font-family: var(--serif); color: var(--gold-lt); font-size: 2.2rem; margin-bottom: 1rem; }
   .portfolio-text p { color: var(--text); font-size: 1.1rem; margin-bottom: 2rem; font-weight: 300; line-height: 1.6; }
+  
   .suno-link-btn {
     display: inline-flex; align-items: center; gap: 12px; background: var(--gold); color: #000;
     text-decoration: none; padding: 1rem 2rem; border-radius: 4px; font-weight: 700; transition: all 0.3s ease;
@@ -137,17 +164,78 @@
   }
   .portfolio-image img { width: 100%; height: auto; display: block; }
 
-  /* ── ABOUT SECTION (RESTORED FULL TEXT) ── */
+  /* ── PRICING SECTION (NEW) ── */
+  .pricing-section { margin-bottom: 5rem; }
+  .pricing-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;
+  }
+  .price-card {
+    background: var(--bg-form); border: 1px solid var(--border); border-radius: 8px;
+    padding: 3rem 2rem; position: relative; display: flex; flex-direction: column;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+  }
+  .price-card.featured {
+    border-color: var(--gold);
+  }
+  .price-card.featured::after {
+    content: 'החבילה המבוקשת ביותר'; position: absolute; top: -15px; left: 50%;
+    transform: translateX(-50%); background: linear-gradient(135deg, var(--gold-lt), var(--gold));
+    color: #000; padding: 0.3rem 1.2rem; font-size: 0.8rem; font-weight: 800; border-radius: 20px;
+    letter-spacing: 1px;
+  }
+  .price-header { text-align: center; margin-bottom: 2rem; border-bottom: 1px solid rgba(201,168,76,0.15); padding-bottom: 1.5rem; }
+  .price-header h3 { font-family: var(--serif); color: #fff; font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .price-tag { font-size: 2.8rem; font-weight: 800; color: var(--gold-lt); font-family: var(--serif); line-height: 1; }
+  .old-price { font-size: 1.2rem; color: var(--text-dim); text-decoration: line-line-through; text-decoration: line-through; margin-right: 0.5rem; }
+  
+  .price-features { list-style: none; margin-bottom: 2.5rem; flex-grow: 1; }
+  .price-features li {
+    margin-bottom: 1rem; position: relative; padding-right: 1.8rem; font-size: 1.02rem; font-weight: 300; color: var(--text);
+  }
+  .price-features li::before {
+    content: '✓'; position: absolute; right: 0; color: var(--gold); font-weight: bold; font-size: 1.1rem;
+  }
+  .price-features li.addon-note {
+    color: var(--text-dim); font-size: 0.9rem; padding-right: 0; margin-top: 0.25rem;
+  }
+  .price-features li.addon-note::before { content: ''; }
+
+  .pricing-footer-notes {
+    background: var(--bg-input); padding: 1.5rem; border-radius: 6px; border: 1px solid var(--border);
+    margin-top: 2rem; font-size: 0.95rem; color: var(--text-dim); font-weight: 300;
+  }
+  .pricing-footer-notes strong { color: var(--gold-lt); }
+
+  /* ── TIPS & ARTICLES SECTION (NEW) ── */
+  .tips-section { margin-bottom: 5rem; }
+  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+  .tip-article {
+    background: var(--bg-form); border: 1px solid var(--border); border-radius: 8px;
+    padding: 2.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  }
+  .tip-article h3 { font-family: var(--serif); color: var(--gold-lt); font-size: 1.5rem; margin-bottom: 1rem; border-right: 3px solid var(--gold); padding-right: 0.75rem; }
+  .tip-article p { font-size: 1.05rem; font-weight: 300; color: var(--text); text-align: justify; margin-bottom: 1.5rem; line-height: 1.7; }
+  .tip-steps { margin-top: 1rem; }
+  .tip-step-item { margin-bottom: 1.2rem; }
+  .tip-step-item strong { color: var(--gold); display: block; font-size: 1.1rem; margin-bottom: 0.25rem; }
+  
+  .tips-summary-box {
+    background: var(--bg-input); border-right: 4px solid var(--purple-lt); padding: 2rem; border-radius: 4px; margin-top: 2rem;
+  }
+  .tips-summary-box h4 { font-family: var(--serif); color: var(--purple-lt); font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .tips-summary-box p { font-size: 1.05rem; font-weight: 300; line-height: 1.6; color: var(--text); }
+
+  /* ── ABOUT SECTION ── */
   .about-section {
-    max-width: 850px; margin: 0 auto 4rem auto; background: var(--bg-form);
+    max-width: 1000px; margin: 0 auto 5rem auto; background: var(--bg-form);
     border-right: 4px solid var(--gold); padding: 3rem 2.5rem; border-radius: 4px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.4);
   }
   .about-section h3 { font-family: var(--serif); color: var(--gold-lt); font-size: 1.8rem; margin-bottom: 1rem; }
   .about-section p { color: var(--text); font-weight: 300; font-size: 1.1rem; line-height: 1.7; }
 
-  /* ── FAQ SECTION (RESTORED FULL TEXT) ── */
-  .faq-section { max-width: 850px; margin: 0 auto 5rem auto; }
+  /* ── FAQ SECTION ── */
+  .faq-section { max-width: 1000px; margin: 0 auto 5rem auto; }
   .faq-header { text-align: center; margin-bottom: 2rem; }
   .faq-header h2 { font-family: var(--serif); color: var(--gold-lt); font-size: 2.2rem; }
   details { background: var(--bg-form); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1rem; overflow: hidden; }
@@ -157,7 +245,7 @@
   .faq-content { padding: 0 1.5rem 1.5rem 1.5rem; color: var(--text); font-weight: 300; font-size: 1.05rem; line-height: 1.7; }
 
   /* ── ORDER FORM ── */
-  .form-section { max-width: 850px; margin: 0 auto 4rem auto; }
+  .form-section { max-width: 1000px; margin: 0 auto 4rem auto; }
   .inmusic-form-wrapper { background: var(--bg-form); border: 1px solid var(--border); border-radius: 8px; padding: 3rem 2rem; position: relative; }
   .inmusic-form-wrapper::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
   .form-header { text-align: center; margin-bottom: 2.5rem; }
@@ -170,13 +258,14 @@
     padding: 1.1rem; color: var(--text); font-family: var(--sans); font-size: 1.05rem;
   }
   .inmusic-input:focus, .inmusic-select:focus, .inmusic-textarea:focus { outline: none; border-color: var(--gold); }
+  
   .submit-btn {
     width: 100%; background: linear-gradient(135deg, var(--whatsapp), #1EBE5D); color: #fff; border: none; border-radius: 4px;
     padding: 1.4rem; font-size: 1.2rem; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 2rem;
   }
 
   /* ── WHATSAPP CTA ── */
-  .whatsapp-quick-cta { text-align: center; margin-bottom: 5rem; }
+  .whatsapp-quick-cta { text-align: center; margin-bottom: 2rem; }
   .wa-btn-floating {
     display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: #fff;
     padding: 1.2rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem;
@@ -185,7 +274,7 @@
   .wa-btn-floating:hover { transform: translateY(-3px); }
 
   @media (max-width: 900px) {
-    .grid-personal, .grid-business, .form-grid { grid-template-columns: 1fr; }
+    .grid-personal, .grid-business, .form-grid, .pricing-grid, .tips-grid { grid-template-columns: 1fr; }
     .portfolio-banner { flex-direction: column; text-align: center; padding: 2rem; }
     .portfolio-image { flex: 0 0 auto; width: 100%; max-width: 250px; }
   }
@@ -193,15 +282,19 @@
 </head>
 <body>
 
+<div class="hero-banner">
+  <h0>INMUSIC STUDIO</h0>
+  <p>אולפן הפקות פרימיום — הופכים רעיונות וזיכרונות לפסקול קולנועי מרגש ללא פשרות.</p>
+</div>
+
 <div class="landing-container">
   
   <section class="intro-section">
-    <div class="intro-tag">InMusic Studio</div>
-    <h1 class="intro-title">פסקול קולנועי לסיפור שלכם<br>מאסטר אולפני תוך 48 שעות.</h1>
+    <div class="intro-tag">הפקה הוליוודית</div>
+    <h1 class="intro-title">מאסטר אולפני תוך 48 שעות<br><span style="color:var(--gold);">מחירון מבצעים מיוחד</span></h1>
     <p class="intro-desc">
-      אנחנו לא מייצרים 'עוד הקלטה' — אלא יצירת מופת מוזיקלית ברמה הגבוהה ביותר בישראל. מילים מקוריות, לחן מדויק, וביצוע ווקאלי ללא פשרות. 
+      מתנה של פעם בחיים או תעודת זהות קולית יוקרתית לעסק שלכם. אנחנו יוצרים יצירות מופת מוזיקליות המשלבות כתיבה מקורית, לחן מהודק, וביצוע ווקאלי ברמה הגבוהה ביותר בישראל.
     </p>
-    <span class="intro-highlight">הגיע הזמן להפוך את הרגעים הגדולים שלכם להפקה שמרעידה את הלב.</span>
   </section>
 
   <section class="process-section">
@@ -235,6 +328,56 @@
         <h4>המאסטר אצלכם</h4>
         <p>קובץ האודיו הסופי אצלכם במייל תוך 48 שעות, כולל עמוד YouTube רשמי.</p>
       </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">חבילות הפקה ומחירון מבצע</h2>
+  <section class="pricing-section">
+    <div class="pricing-grid">
+      
+      <div class="price-card">
+        <div class="price-header">
+          <h3>חבילת "אקספרס"</h3>
+          <span class="old-price">899 ₪</span>
+          <span class="price-tag">599 ₪</span>
+        </div>
+        <ul class="price-features">
+          <li><strong>הפקה מוזיקלית מלאה:</strong> קובץ אודיו סופי בסטנדרט מאסטר, בליווי תמונת רקע סטטית מותאמת אישית.</li>
+          <li><strong>אספקה מהירה:</strong> שיר מוכן ומלוטש תוך 48 שעות בלבד מרגע אישור ההזמנה.</li>
+          <li><strong>כתיבה והלחנה מקצועית:</strong> המפיק והכותב של הסטודיו מקבלים ממכם את כֹּל התוכן והפרטים, מבצעים תחקיר מעמיק על בעלי השמחה ותופרים מילים, לחן ועיבוד מוזיקלי מדויק.</li>
+          <li><strong>בקרת איכות וסקיצות:</strong> אנו שולחים סקיצה לפני העריכה והמיקס הסופי לקבלת הערות ואישור שלכם.</li>
+          <li><strong>שביעות רצון מובטחת:</strong> עד 3 סבבי תיקונים ודיוקים ללא עלות נוספת דרך הוואטסאפ.</li>
+          <li class="addon-note">* המבצע המיוחד תקף לפונים דרך הוואטסאפ בלבד.</li>
+        </ul>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-header">
+          <h3>חבילת "פרימיום"</h3>
+          <span class="old-price">1499 ₪</span>
+          <span class="price-tag">999 ₪</span>
+        </div>
+        <ul class="price-features">
+          <li><strong>הפקה מוזיקלית + קליפ וידאו:</strong> הפקה מוזיקלית מושלמת בשילוב קליפ וידאו מושקע ומרהיב ברזולוציית 8K.</li>
+          <li><strong>אספקה מהירה:</strong> השיר והקליפ מוכנים לחלוטין תוך 48 שעות מרגע אישור ההזמנה.</li>
+          <li><strong>שיחת בימוי אישית:</strong> ניזום שיחת בימוי פרטנית עם לירון כדי להבין בצורה אבסולוטית את הוויז'ן (Vision) שלכם.</li>
+          <li><strong>ביצוע וידאו ממוקד:</strong> הקליפ יוצא להפקה מקצועית חד-פעמית על בסיס שיחת הבימוי המשותפת.</li>
+          <li><strong>תשלום קל ומאובטח:</strong> אפשרות לתשלום אונליין מהיר ישירות מהנייד.</li>
+          <li class="addon-note">* החבילה המועדפת והמומלצת ביותר על ידי רוב לקוחות האולפן.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="pricing-footer-notes">
+      <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--gold);">תוספות ושירותים משלימים באולפן:</p>
+      <ul style="list-style: square; padding-right: 1.5rem; font-weight: 300;">
+        <li><strong>שעות אולפן ותיקונים חריגים:</strong> מעבר ל-3 סבבי התיקונים המובנים באודיו, כֹּל שעת אולפן נוספת (או חלק ממנה) תתומחר ב-199 ₪.</li>
+        <li><strong>מצגת תמונות משולבת (לחבילת אקספרס):</strong> שילוב של עד 30 תמונות אישיות לכדי מצגת וידאו זורמת על גבי השיר: 299 ₪.</li>
+        <li><strong>שינוי קונספט וידאו (לחבילת פרימיום):</strong> במידה ותרצו לשנות את כֹּל הקונספט או להפיק קליפ חדש לחלוטין לאחר ההפקה: 499 ₪.</li>
+        <li><strong>הוספת כתוביות קריוקי מובנות:</strong> תוספת כתוביות רצות ומתוזמנות על גבי הווידאו: 149 ₪.</li>
+        <li><strong>הוספת דמויות מותאמות אישית לקליפ:</strong> הפקת דמות מבוססת תמונה אישית (עד 2 דמויות לקליפ, ללא התחייבות להתאמה מושלמת אך ברמת דמיון גבוהה מאוד): 149 ₪ לכל דמות.</li>
+      </ul>
     </div>
   </section>
 
@@ -285,7 +428,7 @@
       <div class="card-front"><h3>הפקת קליפ ממותג</h3></div>
       <div class="card-hover">
         <h4>וידאו באיכות הוליוודית</h4>
-        <p>שילוב של סאונד אולפני עם ויזואליה מרהיבה. הפקה המותאמת לכל פלטפורמה (מרוחב מלא ועד 9:16 לניידים).</p>
+        <p>שילוב של סאונד אולפני עם ויזואליה מרהיבה. הפקה המותאמת אישית לכל פלטפורמה ולפי דרישתכם – החל ממסך רחב ועד יחס 9:16 מושלם לניידים.</p>
         <span class="card-btn">להזמנת קליפ</span>
       </div>
     </a>
@@ -300,7 +443,59 @@
       </a>
     </div>
     <div class="portfolio-image">
-      <img src="logo.jpg" alt="InMusic Studio Logo">
+      <img src="image_81bd6c.png" alt="InMusic Studio Logo">
+    </div>
+  </section>
+
+  <h2 class="section-title">🎬 טיפים לביצוע ורעיונות לכתיבה מהאולפן</h2>
+  <section class="tips-section">
+    <div class="tips-grid">
+      
+      <div class="tip-article">
+        <h3>איך לבחור את הסגנון והנושא המושלמים?</h3>
+        <p>
+          כשזה מגיע ליצירת שיר אישי, בחירת הסגנון המוזיקלי והנושא הנכון היא הקו המנחה שיקבע האם השיר שלכם יהיה 'עוד שיר' או יצירה בלתי נשכחת שתלווה את המשפחה שנים קדימה. לכל סגנון מוזיקלי יש תדר, קצב ואווירה ייחודיים משלו שמכתיבים את כֹּל הגוון הויזואלי והווקאלי של ההפקה.
+        </p>
+        <p>
+          חשבו קודם כֹּל על האדם שעבורו אתם מפיקים את המתנה — האם הוא טיפוס של פופ אנרגטי ומקפיץ, רוק עוצמתי, בלדה מרגשת ונוגעת, או אולי מוזיקה אלקטרונית מרימה? הנושא של השיר צריך להגיע מהמקומות הכי כנים ואמיתיים שלכם: חוויות חיים משותפות, רגעי אהבה, פריצות דרך או אפילו בדיחות פנימיות ורגעים קטנים ויומיומיים שמצחיקים ומחברים אתכם.
+        </p>
+        <p>
+          אם מדובר באירוע ממוקד כמו יום הולדת עגול, חתונה או בר מצווה, התאמת הסגנון והתוכן לבעל/ת השמחה היא קריטית לחלוטין. שילוב מדויק בין הז'אנר שהם אוהבים לבין הסיפורים האישיים שלכם יביא לתוצאה שתפגע בול בלבבות ותשאיר חותם קולנועי אמיתי.
+        </p>
+      </div>
+
+      <div class="tip-article">
+        <h3>השלבים לכתיבת שיר מקורי כמתנה</h3>
+        <p>
+          יצירת שיר מקורי מאפס היא חוויה סוחפת ומרגשת עבורכם ועבור מי שיקבל אותה. כדי לעשות סדר בתהליך היצירתי, הנה ארבעת השלבים המובילים שלנו שיעזרו לכם לזקק את הרעיונות שלכם בצורה הטובה ביותר:
+        </p>
+        <div class="tip-steps">
+          <div class="tip-step-item">
+            <strong>1. השראה ואיסוף זיכרונות</strong>
+            <p>רשמו לעצמכם נקודות מפתח על חוגג השמחה: מה התחביבים שלו? מה מייחד אותו? נסו לדלות סיפורים, מקומות שביקרתם בהם יחד או רגעים משעשעים שישמשו בסיס יציב לכתיבה.</p>
+          </div>
+          <div class="tip-step-item">
+            <strong>2. כתיבת המילים (קופי)</strong>
+            <p>אחרי שיש לכם קונספט, התחילו לכתוב את השורות. אל תפחדו אם זה לא יוצא מושלם או מחורז במאה אחוז על ההתחלה — זה חלק טבעי מהיצירה. השתמשו בשפה כנה, פשוטה וישירה שמביעה את הרגש האמיתי שלכם.</p>
+          </div>
+          <div class="tip-step-item">
+            <strong>3. הלחנה והתאמת המנגינה</strong>
+            <p>אם יש לכם כיוון ללחן או פזמון שזמזמתם בטלפון — מצוין! תקליטו את עצמכם ושלחו לנו את קובץ הסאונד. אם לא, אל דאגה, המפיקים של האולפן ייקחו את הטקסט ויתאימו לו את הלחן המושלם.</p>
+          </div>
+          <div class="tip-step-item">
+            <strong>4. שיתוף, עריכה ודיוק</strong>
+            <p>שתפו את הטיוטה עם אדם קרוב כדי לקבל חוות דעת, וקבלו מאיתנו את הסקיצה הראשונית של האולפן כדי לדייק כֹּל מילה וכֹּל תו עד לרמת גימור מוחלטת.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tips-summary-box">
+      <h4>סיכום: איך להפוך את השיר שלכם למתנה בלתי נשכחת?</h4>
+      <p>
+        כדי שהשיר יהפוך לזיכרון נצחי, המפתח החשוב ביותר הוא לפעול מהלב. אל תפחדו להיות רגישים, חשופים או משעשעים — זה הזמן להכניס את האישיות הייחודית שלכם לתוך הטקסט. השתמשו בבדיחות פנימיות ובחוויות אישיות שרק אתם מכירים כדי להעניק לשיר ערך סנטימנטלי עצום. זכרו תמיד: גם אם השיר אינו מושלם מבחינה פואטית או פנימיות קולית, הכוונה העמוקה, ההשקעה והמאמץ שהשקעתם הם אלו שיהפכו את המתנה הזו לבלתי נשכחת לעד עבור האנשים היקרים לכם מכֹּל.
+      </p>
     </div>
   </section>
 
@@ -353,6 +548,7 @@
         <h2>אפיון הפקה מתקדם</h2>
         <p style="color:var(--text-dim); font-weight:300;">מלאו את כֹּל הפרטים, והמערכת תשלח אפיון מסודר ישירות אלינו לוואטסאפ.</p>
       </div>
+
       <form id="production-form" onsubmit="sendToWhatsApp(event)">
         <div class="form-grid">
           <div class="input-group">
@@ -367,32 +563,31 @@
         <div class="form-grid" style="margin-top:1.5rem;">
           <div class="input-group">
             <label>עבור מי ההפקה?</label>
-            <input type="text" id="field-target" class="inmusic-input" placeholder="לסבא משה, לחברת..." required>
+            <input type="text" id="field-target" class="inmusic-input" placeholder="לסבא משה, שם העסק..." required>
           </div>
           <div class="input-group">
-            <label>סוג ההפקה</label>
+            <label>סוג ההפקה והחבילה</label>
             <select id="field-type" class="inmusic-select" required>
               <option value="" disabled selected>בחרו...</option>
-              <option value="wedding">שיר לחתונה</option>
-              <option value="friends">שיר חברים</option>
-              <option value="barmitzvah">בר/בת מצווה</option>
-              <option value="birthday">יום הולדת / נישואין</option>
-              <option value="biz_audio">מיתוג עסקי</option>
-              <option value="biz_video">הפקת קליפ ממותג</option>
+              <option value="express_wedding">חבילת אקספרס - שיר לחתונה (599 ₪)</option>
+              <option value="express_barmitzvah">חבילת אקספרס - בר/בת מצווה (599 ₪)</option>
+              <option value="express_gift">חבילת אקספרס - שיר מתנה משפחתי (599 ₪)</option>
+              <option value="premium_clip">חבילת פרימיום - שיר + קליפ וידאו 8K (999 ₪)</option>
+              <option value="biz_audio">מיתוג עסקי / ג'ינגל מסחרי</option>
             </select>
           </div>
         </div>
         <div class="input-group full-width" style="margin-top:1.5rem;">
           <label>סגנון (Vibe)</label>
-          <input type="text" id="field-vibe" class="inmusic-input" placeholder="פופ, בלדה, טראנס...">
+          <input type="text" id="field-vibe" class="inmusic-input" placeholder="פופ-האוס, בלדה מרגשת, טראנס מועדונים...">
         </div>
         <div class="input-group full-width" style="margin-top:1.5rem;">
-          <label>סיפור הרקע וחזון</label>
-          <textarea id="field-story" class="inmusic-textarea" style="height:120px;" placeholder="שתפו כמה שיותר פרטים..."></textarea>
+          <label>סיפור הרקע וחזון היצירה</label>
+          <textarea id="field-story" class="inmusic-textarea" style="height:120px;" placeholder="שתפו כמה שיותר פרטים, זיכרונות, שמות, גילאים או מסרים שיווקיים שתרצו שנשזור בשיר..."></textarea>
         </div>
         <button type="submit" class="submit-btn">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          הזנק הפקה בוואטסאפ
+          שליחת אפיון הפקה לוואטסאפ
         </button>
       </form>
     </div>
@@ -401,7 +596,7 @@
   <div class="whatsapp-quick-cta">
     <a href="https://wa.me/972525544445" target="_blank" class="wa-btn-floating">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      מענה מהיר בוואטסאפ
+      ייעוץ ישיר בוואטסאפ
     </a>
   </div>
 
@@ -417,10 +612,14 @@
     const vibe = document.getElementById('field-vibe').value;
     const story = document.getElementById('field-story').value;
 
-    let msg = `*היי לירון, הגעתי מדף הנחיתה של האולפן!* 🎧\n\n`;
-    msg += `*שם:* ${name}\n*טלפון:* ${phone}\n*עבור:* ${target}\n*סוג:* ${type}\n`;
-    if (vibe) msg += `*סטייל:* ${vibe}\n`;
-    if (story) msg += `*סיפור:* ${story}\n`;
+    let msg = `*היי לירון, הגעתי מדף הנחיתה המעודכן של האולפן!* 🎧\n\n`;
+    msg += `*שם המזמין/ה:* ${name}\n`;
+    msg += `*טלפון:* ${phone}\n`;
+    msg += `*עבור מי ההפקה:* ${target}\n`;
+    msg += `*מסלול וחבילה מבוקשת:* ${type}\n`;
+    
+    if (vibe) msg += `*סגנון מועדף (Vibe):* ${vibe}\n`;
+    if (story) msg += `*סיפור הרקע והחזון:* ${story}\n`;
 
     const whatsappUrl = `https://wa.me/972525544445?text=${encodeURIComponent(msg)}`;
     window.open(whatsappUrl, '_blank');
