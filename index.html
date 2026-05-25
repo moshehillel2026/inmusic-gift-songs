@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>InMusic Studio — הפקה מוזיקלית וקליפים בסטנדרט הוליוודי</title>
+<meta name="description" content="מאסטר אולפני תוך 48 שעות. שיר במתנה, שירי חופה, מיתוג עסקי והפקות וידאו 8K מבית InMusic Studio.">
+<meta property="og:title" content="InMusic Studio — אולפן הפקות פרימיום">
+<meta property="og:description" content="פסקול קולנועי לסיפור שלכם. מאסטר אולפני תוך 48 שעות בלבד.">
+<meta property="og:image" content="https://moshehillel2026.github.io/inmusic-gift-songs/logo.jpg">
+<meta property="og:url" content="https://moshehillel2026.github.io/inmusic-gift-songs/">
+<meta property="og:type" content="website">
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Heebo:wght@300;400;500;600;800&display=swap" rel="stylesheet">
 <style>
   /* ── TOKENS ── */
@@ -94,10 +102,10 @@
   .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2.5rem; }
   .process-step { position: relative; padding-top: 2.5rem; }
 
-  /* תוקן: צהוב/זהב עדין ובולט למספרים */
+  /* הבהרת המספרים לזהב-צהוב בולט יותר */
   .step-number {
     position: absolute; top: -15px; right: -10px; font-family: var(--serif);
-    font-size: 5rem; font-weight: 900; color: rgba(201, 168, 76, 0.25); 
+    font-size: 5rem; font-weight: 900; color: rgba(232, 208, 138, 0.35); 
     line-height: 1; z-index: 0;
   }
   .process-step h4 { color: var(--purple-lt); font-size: 1.2rem; margin-bottom: 0.5rem; position: relative; z-index: 1; }
@@ -290,7 +298,8 @@
     .grid-personal, .grid-business, .form-grid, .pricing-grid, .tips-grid { grid-template-columns: 1fr; }
     .portfolio-banner { flex-direction: column; text-align: center; padding: 2rem; }
     .portfolio-image { flex: 0 0 auto; width: 100%; max-width: 250px; }
-    #backToTopBtn { bottom: 20px; right: 20px; width: 45px; height: 45px; }
+    /* הסתרת כפתור חזור למעלה בנייד לפי הבקשה */
+    #backToTopBtn { display: none !important; }
   }
 </style>
 </head>
