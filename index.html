@@ -94,9 +94,10 @@
   .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2.5rem; }
   .process-step { position: relative; padding-top: 2.5rem; }
 
+  /* תוקן: צהוב/זהב עדין ובולט למספרים */
   .step-number {
     position: absolute; top: -15px; right: -10px; font-family: var(--serif);
-    font-size: 5rem; font-weight: 900; color: rgba(216, 180, 254, 0.15);
+    font-size: 5rem; font-weight: 900; color: rgba(201, 168, 76, 0.25); 
     line-height: 1; z-index: 0;
   }
   .process-step h4 { color: var(--purple-lt); font-size: 1.2rem; margin-bottom: 0.5rem; position: relative; z-index: 1; }
@@ -164,7 +165,7 @@
   }
   .portfolio-image img { width: 100%; height: auto; display: block; }
 
-  /* ── PRICING SECTION (NEW) ── */
+  /* ── PRICING SECTION ── */
   .pricing-section { margin-bottom: 5rem; }
   .pricing-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;
@@ -174,9 +175,7 @@
     padding: 3rem 2rem; position: relative; display: flex; flex-direction: column;
     box-shadow: 0 15px 35px rgba(0,0,0,0.4);
   }
-  .price-card.featured {
-    border-color: var(--gold);
-  }
+  .price-card.featured { border-color: var(--gold); }
   .price-card.featured::after {
     content: 'החבילה המבוקשת ביותר'; position: absolute; top: -15px; left: 50%;
     transform: translateX(-50%); background: linear-gradient(135deg, var(--gold-lt), var(--gold));
@@ -186,7 +185,7 @@
   .price-header { text-align: center; margin-bottom: 2rem; border-bottom: 1px solid rgba(201,168,76,0.15); padding-bottom: 1.5rem; }
   .price-header h3 { font-family: var(--serif); color: #fff; font-size: 1.8rem; margin-bottom: 0.5rem; }
   .price-tag { font-size: 2.8rem; font-weight: 800; color: var(--gold-lt); font-family: var(--serif); line-height: 1; }
-  .old-price { font-size: 1.2rem; color: var(--text-dim); text-decoration: line-line-through; text-decoration: line-through; margin-right: 0.5rem; }
+  .old-price { font-size: 1.2rem; color: var(--text-dim); text-decoration: line-through; margin-right: 0.5rem; }
   
   .price-features { list-style: none; margin-bottom: 2.5rem; flex-grow: 1; }
   .price-features li {
@@ -206,7 +205,7 @@
   }
   .pricing-footer-notes strong { color: var(--gold-lt); }
 
-  /* ── TIPS & ARTICLES SECTION (NEW) ── */
+  /* ── TIPS & ARTICLES SECTION ── */
   .tips-section { margin-bottom: 5rem; }
   .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
   .tip-article {
@@ -273,10 +272,25 @@
   }
   .wa-btn-floating:hover { transform: translateY(-3px); }
 
+  /* ── BACK TO TOP BUTTON ── */
+  #backToTopBtn {
+    opacity: 0; pointer-events: none;
+    position: fixed; bottom: 30px; right: 30px; z-index: 99;
+    background: linear-gradient(135deg, var(--gold-lt), var(--gold));
+    color: #000; border: none; outline: none; cursor: pointer;
+    width: 55px; height: 55px; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    box-shadow: 0 4px 15px rgba(201, 168, 76, 0.4);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  #backToTopBtn.show { opacity: 1; pointer-events: auto; }
+  #backToTopBtn:hover { transform: translateY(-5px); }
+  
   @media (max-width: 900px) {
     .grid-personal, .grid-business, .form-grid, .pricing-grid, .tips-grid { grid-template-columns: 1fr; }
     .portfolio-banner { flex-direction: column; text-align: center; padding: 2rem; }
     .portfolio-image { flex: 0 0 auto; width: 100%; max-width: 250px; }
+    #backToTopBtn { bottom: 20px; right: 20px; width: 45px; height: 45px; }
   }
 </style>
 </head>
@@ -602,7 +616,14 @@
 
 </div>
 
+<button id="backToTopBtn" onclick="scrollToTop()" title="חזור למעלה">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 15l-6-6-6 6"/>
+  </svg>
+</button>
+
 <script>
+  // שליחת טופס לוואטסאפ
   function sendToWhatsApp(event) {
     event.preventDefault(); 
     const name = document.getElementById('field-name').value;
@@ -623,6 +644,24 @@
 
     const whatsappUrl = `https://wa.me/972525544445?text=${encodeURIComponent(msg)}`;
     window.open(whatsappUrl, '_blank');
+  }
+
+  // מנגנון כפתור "חזור למעלה"
+  const backToTopBtn = document.getElementById("backToTopBtn");
+  
+  window.onscroll = function() {
+    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+      backToTopBtn.classList.add("show");
+    } else {
+      backToTopBtn.classList.remove("show");
+    }
+  };
+
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }
 </script>
 
